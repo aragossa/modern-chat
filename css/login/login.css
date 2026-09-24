@@ -1,0 +1,636 @@
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
+            padding: 40px;
+            width: 100%;
+            max-width: 450px;
+            animation: messageSlide 0.6s ease-out;
+            border: 2px solid transparent;
+        }
+        
+        @keyframes messageSlide {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 28px;
+            font-weight: 600;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: #fafafa;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: #12b7f5;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(18, 183, 245, 0.1);
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #12b7f5 0%, #00a2e8 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 18px rgba(18, 183, 245, 0.5);
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(18, 183, 245, 0.6);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        /* 注册链接样式 - 与helper-links保持一致 */
+        .register-link {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .register-link a {
+            color: #12b7f5;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        
+        .register-link a:hover {
+            color: #00a2e8;
+            text-decoration: underline;
+        }
+        
+        .error-message {
+            background: rgba(255, 77, 79, 0.1);
+            color: #ff4d4f;
+            padding: 14px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            border: 2px solid rgba(255, 77, 79, 0.2);
+        }
+        
+        .success-message {
+            background: rgba(158, 234, 106, 0.1);
+            color: #52c41a;
+            padding: 14px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            border: 2px solid rgba(158, 234, 106, 0.2);
+        }
+        
+        /* 登录选项切换 */
+        .login-options {
+            display: flex;
+            margin-bottom: 30px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid #e0e0e0;
+        }
+        
+        .login-option {
+            flex: 1;
+            padding: 14px;
+            text-align: center;
+            cursor: pointer;
+            background: #fafafa;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            color: #666;
+        }
+        
+        .login-option.active {
+            background: linear-gradient(135deg, #12b7f5 0%, #00a2e8 100%);
+            color: white;
+            border-color: #12b7f5;
+        }
+        
+        /* 登录方式容器 */
+        .login-method {
+            display: none;
+        }
+        
+        .login-method.active {
+            display: block;
+        }
+        
+        /* 二维码样式 */
+        .qr-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        #qr-code {
+            display: inline-block;
+            padding: 10px;
+            background: black;
+            border-radius: 12px;
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
+        }
+        
+        .qr-info {
+            margin-top: 15px;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .countdown {
+            font-weight: 600;
+            color: #12b7f5;
+        }
+        
+        /* 状态提示 */
+        .status-message {
+            margin: 15px 0;
+            padding: 14px;
+            border-radius: 12px;
+            font-size: 14px;
+            text-align: center;
+        }
+        
+        .status-pending {
+            background: rgba(18, 183, 245, 0.1);
+            color: #12b7f5;
+            border: 2px solid rgba(18, 183, 245, 0.2);
+        }
+        
+        .status-scanning {
+            background: rgba(255, 193, 7, 0.1);
+            color: #ffc107;
+            border: 2px solid rgba(255, 193, 7, 0.2);
+        }
+        
+        .status-success {
+            background: rgba(158, 234, 106, 0.1);
+            color: #52c41a;
+            border: 2px solid rgba(158, 234, 106, 0.2);
+        }
+        
+        .status-error {
+            background: rgba(255, 77, 79, 0.1);
+            color: #ff4d4f;
+            border: 2px solid rgba(255, 77, 79, 0.2);
+        }
+        
+        .helper-links {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .helper-links a {
+            color: #12b7f5;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-weight: 600;
+        }
+
+        .helper-links a:hover {
+            color: #00a2e8;
+            text-decoration: underline;
+        }
+
+        /* 协议复选框样式 */
+        .agreement-checkbox {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 12px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .agreement-checkbox input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            margin: 0 10px 0 0;
+            cursor: pointer;
+            accent-color: #12b7f5;
+        }
+
+        .agreement-checkbox label {
+            font-size: 13px;
+            color: #666;
+            cursor: pointer;
+            flex: 1;
+            margin: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .agreement-checkbox a {
+            color: #12b7f5;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .agreement-checkbox a:hover {
+            text-decoration: underline;
+        }
+
+        /* 协议预览弹窗样式 */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 24px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            font-size: 20px;
+            color: #333;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 28px;
+            color: #999;
+            cursor: pointer;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+
+        .modal-close:hover {
+            background: #f5f5f5;
+            color: #333;
+        }
+
+        .modal-body {
+            padding: 24px;
+            overflow-y: auto;
+            flex: 1;
+            line-height: 1.8;
+            color: #555;
+            font-size: 14px;
+        }
+
+        .modal-body h1, .modal-body h2, .modal-body h3 {
+            color: #333;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .modal-body h1 { font-size: 20px; }
+        .modal-body h2 { font-size: 18px; }
+        .modal-body h3 { font-size: 16px; }
+
+        .modal-body ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+
+        .modal-body li {
+            margin: 5px 0;
+        }
+
+        .modal-footer {
+            padding: 16px 24px;
+            border-top: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+        }
+
+        .modal-btn {
+            padding: 10px 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .modal-btn-primary {
+            background: #12b7f5;
+            color: white;
+        }
+
+        .modal-btn-primary:hover {
+            background: #00a2e8;
+        }
+
+        .modal-btn-secondary {
+            background: #f5f5f5;
+            color: #666;
+        }
+
+        .modal-btn-secondary:hover {
+            background: #e0e0e0;
+        }
+
+        .modal-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .modal-btn-primary:disabled {
+            background: #ccc;
+        }
+
+        /* 阅读进度提示 */
+        .read-progress {
+            position: sticky;
+            top: 0;
+            background: white;
+            padding: 12px 24px;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 13px;
+            color: #666;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .read-progress-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 180px;
+        }
+
+        .read-progress-bar {
+            flex: 1;
+            height: 4px;
+            background: #e0e0e0;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .read-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #12b7f5, #00a2e8);
+            width: 0;
+            transition: width 0.3s ease;
+        }
+
+        .read-progress-text {
+            min-width: 80px;
+            text-align: right;
+            font-size: 12px;
+            color: #999;
+        }
+
+        .read-progress .check-icon {
+            display: none;
+            color: #52c41a;
+            font-size: 14px;
+        }
+
+        .read-progress.completed .check-icon {
+            display: block;
+        }
+
+        .read-progress.completed .read-progress-text {
+            color: #52c41a;
+            font-weight: 600;
+        }
+
+        /* 验证码容器样式 */
+        #captcha {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 10px 0;
+        }
+        
+        /* 安全锁弹窗样式 */
+        .safety-lock-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .safety-lock-overlay.active {
+            display: flex;
+            animation: fadeIn 0.3s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .safety-lock-modal {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.4s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .safety-lock-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+            color: #ff4d4f;
+        }
+        
+        .safety-lock-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 16px;
+        }
+        
+        .safety-lock-message {
+            font-size: 16px;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        
+        .safety-lock-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+        
+        .safety-lock-btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .safety-lock-btn-primary {
+            background: linear-gradient(135deg, #ff4d4f 0%, #ff7875 100%);
+            color: white;
+        }
+        
+        .safety-lock-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(255, 77, 79, 0.4);
+        }
+        
+        .safety-lock-btn-secondary {
+            background: #f5f5f5;
+            color: #666;
+        }
+        
+        .safety-lock-btn-secondary:hover {
+            background: #e0e0e0;
+        }
+        
+        @media (max-width: 500px) {
+            .container {
+                margin: 20px;
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            .helper-links {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .safety-lock-modal {
+                padding: 30px 20px;
+            }
+            
+            .safety-lock-buttons {
+                flex-direction: column;
+            }
+            
+            .safety-lock-btn {
+                width: 100%;
+            }
+        }
+    
